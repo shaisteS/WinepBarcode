@@ -11,6 +11,8 @@
     <string name="sure_to_exit">Please , Press Back for Exit . . .  </string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="permission_call_phone">Access to the call phone is needed for detection</string>
+    <string name="permission_reade_phone_state">Access to the reade phone state is needed for detection</string>
 
 
     <!-- Recycler Swipe -->

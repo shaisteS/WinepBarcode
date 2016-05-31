@@ -42,7 +42,9 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
 
     private static final String TAG = ContinuousCaptureActivity.class.getSimpleName();
     // permission request codes need to be < 256
-    private static final int RC_HANDLE_CAMERA_PERM = 42;
+    private static final int RC_HANDLE_CAMERA_PERM =1;
+    private static final int RC_HANDLE_CALL_PHONE=2;
+    private static final int RC_HANDLE_READW_PHONE_STATE=3;
     private CompoundBarcodeView barcodeView;
     private ImageButton switchFlashlightButton;
 
@@ -71,6 +73,21 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         }
         else {
             requestCameraPermission();
+        }
+
+        int phonePermission=ActivityCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE);
+        if (phonePermission==PackageManager.PERMISSION_GRANTED){
+
+        }
+        else {
+            requestPhonePermission();
+        }
+        int phoneReadState=ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_PHONE_STATE);
+        if(phoneReadState==PackageManager.PERMISSION_GRANTED){
+
+        }
+        else {
+            requestPhoneStateread();
         }
 
         barcodeView = (CompoundBarcodeView) findViewById(R.id.barcode_scanner);
@@ -221,6 +238,115 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, listener)
                 .show();
+    }
+
+    private void requestPhonePermission(){
+        Log.w(TAG, "Call Phone permission is not granted. Requesting permission");
+        final String[] permissions = new String[]{Manifest.permission.CAMERA};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(this, permissions,RC_HANDLE_CALL_PHONE );
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,RC_HANDLE_CALL_PHONE);
+            }
+        };
+
+        Snackbar.make(relativeLayoutMain, R.string.permission_call_phone,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok, listener)
+                .show();
+
+
+    }
+    private void requestPhoneStateread(){
+        Log.w(TAG, "Call Phone Reade State permission is not granted. Requesting permission");
+        final String[] permissions = new String[]{Manifest.permission.READ_PHONE_STATE};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(this, permissions,RC_HANDLE_READW_PHONE_STATE );
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,RC_HANDLE_READW_PHONE_STATE);
+            }
+        };
+
+        Snackbar.make(relativeLayoutMain, R.string.permission_reade_phone_state,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok, listener)
+                .show();
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case RC_HANDLE_CAMERA_PERM: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            case RC_HANDLE_CALL_PHONE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            case RC_HANDLE_READW_PHONE_STATE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
     @Override
