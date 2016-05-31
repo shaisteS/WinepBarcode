@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="@dimen/abc_dialog_min_width_minor"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/barcode_content"
+            android:id="@+id/txt_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayout_space_1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="New Text"
+            android:id="@+id/txt_contentBarcode" />
+    </LinearLayout>
+
+    <include layout="@layout/user_toolbar_dialog_barcode_information"/>
+
+</LinearLayout>

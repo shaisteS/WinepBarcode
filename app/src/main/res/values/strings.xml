@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">WinepBarcode</string>
+    <string name="app_name">BarcodeScanner</string>
+    <string name="turn_on_flashlight">Turn on Flashlight</string>
+    <string name="turn_off_flashlight">Turn off Flashlight</string>
+    <string name="barcodeview">barcodeView</string>
+    <string name="barcode_Title">Title:</string>
+    <string name="barcode_content">Content:</string>
+    <string name="no_date">No Date</string>
+    <string name="no_title">No Title</string>
+    <string name="dialog_Get_Title_Barcode_Title">Choose A Title For Barcode</string>
+    <string name="sure_to_exit">Please , Press Back for Exit . . .  </string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+
+
+    <!-- Recycler Swipe -->
+    <string name="deleted">Deleted</string>
+    <string name="undo">UNDO</string>
 </resources>
