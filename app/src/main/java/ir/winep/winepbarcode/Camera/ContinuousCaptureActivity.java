@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -59,6 +60,7 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
     private ImageButton btnCallPhone;
     private BarcodeInformation barcodeInformation;
     private boolean flashStatus=false;//false=off
+    private MediaPlayer mediaPlayer;
 
 
     @Override
@@ -67,6 +69,8 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         setContentView(R.layout.continuous_scan);
         Configuration.getInstance().applicationContext = getBaseContext();
         context=this;
+        mediaPlayer = MediaPlayer.create(ContinuousCaptureActivity.this, R.raw.road_runner);
+
 
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
@@ -92,6 +96,7 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
 
         barcodeView = (CompoundBarcodeView) findViewById(R.id.barcode_scanner);
         barcodeView.setTorchListener(this);
+        barcodeView.setSoundEffectsEnabled(true);
         barcodeView.decodeContinuous(callback);
 
         linearLayoutUserToolbar =(LinearLayout)findViewById(R.id.userToolBar);
@@ -168,6 +173,8 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
+                //startService(serviceMusicPlay);
+                mediaPlayer.start();
                 barcodeView.setTorchOff();
                 pause(barcodeView);
                 barcodeInformation=UserToolBarManage.getInstance().createBarcodeInformation(result.getText(),
@@ -406,5 +413,10 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         flashStatus=!flashStatus;
         switchFlashlightButton.setImageResource(R.mipmap.camera_flash);
 
+    }
+
+    private void stopPlayingSound() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
     }
 }
