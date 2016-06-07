@@ -13,9 +13,12 @@
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="permission_call_phone">Access to the call phone is needed for detection</string>
     <string name="permission_reade_phone_state">Access to the reade phone state is needed for detection</string>
-
-
     <!-- Recycler Swipe -->
     <string name="deleted">Deleted</string>
     <string name="undo">UNDO</string>
+    <!--dialog exit from app-->
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="dialog_exit_from_app_title">Rate Us </string>
 </resources>

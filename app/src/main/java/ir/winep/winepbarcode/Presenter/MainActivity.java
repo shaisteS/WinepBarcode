@@ -1,5 +1,6 @@
 package ir.winep.winepbarcode.Presenter;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView barcodeScanRecyclerView;
     private BarcodeScanRecyclerAdapter adapter;
     private Context context;
-    private int exitSafeCounter = 0;
     private CoordinatorLayout coordinatorLayout;
 
 
@@ -113,17 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        exitSafeCounter++;
         //Clear Cache
-        if (exitSafeCounter == 1) {
-            Snackbar.make(coordinatorLayout,getString(R.string.sure_to_exit), Snackbar.LENGTH_LONG).show();
-        } else if (exitSafeCounter > 1) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-            System.exit(0);
-        }
+        DialogExitFromApplication.getInstance().show(getFragmentManager(),"exit");
     }
 }
