@@ -16,7 +16,8 @@
             android:id="@+id/img_barcode_Image"
             android:src="@mipmap/ic_launcher"
             android:contentDescription="@string/barcode_icon"
-            android:background="#ffffff" />
+            android:background="#ffffff"
+            android:padding="5dp" />
 
         <TextView
             android:background="@android:color/white"
