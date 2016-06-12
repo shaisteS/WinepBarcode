@@ -23,4 +23,5 @@
     <string name="dialog_exit_from_app_title">Rate Us </string>
     <string name="flash_on_off">flash on-off</string>
     <string name="camera_sound">camera_sound</string>
+    <string name="barcode_icon">BarcodeIcon</string>
 </resources>
