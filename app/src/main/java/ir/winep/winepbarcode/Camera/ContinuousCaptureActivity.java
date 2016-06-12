@@ -8,6 +8,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
     private static final int RC_HANDLE_READW_PHONE_STATE=3;
     private CompoundBarcodeView barcodeView;
     private ImageButton switchFlashlightButton;
+    private ImageButton cameraSoundButton;
 
     private Context context;
     private UserToolBarManage userToolBarManage;
@@ -63,14 +65,18 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
     private MediaPlayer mediaPlayer;
 
 
+    SharedPreferences sharedPreferencesCameraSound;
+    static final String sharedPerformanceCameraName="sharedPrefCameraName";
+    private int cameraSoundStatus;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.continuous_scan);
         Configuration.getInstance().applicationContext = getBaseContext();
         context=this;
-        mediaPlayer = MediaPlayer.create(ContinuousCaptureActivity.this, R.raw.road_runner);
-
 
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
@@ -106,7 +112,22 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         btnVisitWeb=(ImageButton)findViewById(R.id.btnVisitWeb);
         btnShare=(ImageButton)findViewById(R.id.btnShare);
         btnCallPhone=(ImageButton)findViewById(R.id.btnCall);
+        switchFlashlightButton = (ImageButton)findViewById(R.id.switch_flashlight);
+        cameraSoundButton=(ImageButton)findViewById(R.id.camera_sound);
         userToolBarManage=UserToolBarManage.getInstance();
+        mediaPlayer = MediaPlayer.create(ContinuousCaptureActivity.this, R.raw.road_runner);
+
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences(sharedPerformanceCameraName, MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
+        cameraSoundStatus=pref.getInt("cameraSoundStatus",0);
+        if (cameraSoundStatus==0) {
+            editor.putInt("cameraSoundStatus", 1); //cameraSound on
+            editor.commit();
+        }
+        else if(cameraSoundStatus==1)
+            cameraSoundButton.setImageResource(R.mipmap.camera_sound_on);
+        else if(cameraSoundStatus==2)
+            cameraSoundButton.setImageResource(R.mipmap.camera_sound_mute);
 
         btnVisitWeb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +174,6 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
             }
         });
 
-        switchFlashlightButton = (ImageButton)findViewById(R.id.switch_flashlight);
         switchFlashlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +186,26 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         if (!hasFlash()) {
             switchFlashlightButton.setVisibility(View.GONE);
         }
+
+        cameraSoundButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cameraSoundStatus=pref.getInt("cameraSoundStatus",0);
+                if (cameraSoundStatus==1) {
+                    editor.putInt("cameraSoundStatus", 2); //cameraSound off
+                    editor.commit();
+                    cameraSoundStatus=2;
+                    cameraSoundButton.setImageResource(R.mipmap.camera_sound_mute);
+                }
+                else if(cameraSoundStatus==2){
+                    editor.putInt("cameraSoundStatus", 1); //cameraSound on
+                    editor.commit();
+                    cameraSoundStatus=1;
+                    cameraSoundButton.setImageResource(R.mipmap.camera_sound_on);
+                }
+
+            }
+        });
     }
 
 
@@ -174,7 +214,8 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
                 //startService(serviceMusicPlay);
-                mediaPlayer.start();
+                if (cameraSoundStatus==1)
+                    mediaPlayer.start();
                 barcodeView.setTorchOff();
                 pause(barcodeView);
                 barcodeInformation=UserToolBarManage.getInstance().createBarcodeInformation(result.getText(),

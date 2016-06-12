@@ -15,17 +15,29 @@
     </com.journeyapps.barcodescanner.CompoundBarcodeView>
 
     <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/camera_sound"
+        android:contentDescription="@string/camera_sound"
+        android:background="@null"
+        android:src="@mipmap/camera_sound_on"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
+
+    <ImageButton
         android:id="@+id/switch_flashlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/turn_on_flashlight"
         android:src="@mipmap/camera_flash"
         android:background="@null"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:paddingTop="10dp"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="10dp"
+        android:contentDescription="@string/flash_on_off"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/camera_sound"
+        android:layout_toEndOf="@+id/camera_sound" />
 
     <LinearLayout
         android:orientation="vertical"
