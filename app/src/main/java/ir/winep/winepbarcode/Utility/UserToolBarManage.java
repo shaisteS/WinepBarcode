@@ -162,10 +162,11 @@ public class UserToolBarManage {
             }
             //for cross from ":"
             index++;
+            numberPhoneChar=mainString.charAt(index);
             while (!numberPhoneChar.toString().equals(";") && index<mainString.length()){
-                numberPhoneChar=mainString.charAt(index);
                 goalStringContent=goalStringContent+numberPhoneChar;
                 index++;
+                numberPhoneChar=mainString.charAt(index);
 
             }
 
