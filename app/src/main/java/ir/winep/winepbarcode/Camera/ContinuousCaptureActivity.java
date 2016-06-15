@@ -21,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.appodeal.ads.Appodeal;
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
@@ -75,6 +76,9 @@ public class ContinuousCaptureActivity extends Activity implements CompoundBarco
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.continuous_scan);
+
+        Appodeal.initialize(this,getString(R.string.app_Key_advertisement), Appodeal.INTERSTITIAL);
+
         Configuration.getInstance().applicationContext = getBaseContext();
         context=this;
 

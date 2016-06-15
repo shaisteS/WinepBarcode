@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
+import com.appodeal.ads.Appodeal;
+
 import java.util.ArrayList;
 
 import ir.winep.winepbarcode.Camera.ContinuousCaptureActivity;
@@ -39,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context=this;
+
+        Appodeal.show(this, Appodeal.INTERSTITIAL);
+        Appodeal.confirm(Appodeal.NON_SKIPPABLE_VIDEO);
+
+
 
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.mainCoordinator_layout);
         barcodeScanRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
