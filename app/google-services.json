@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "572817179669",
+    "firebase_url": "https://admob-app-id-6801014372.firebaseio.com",
+    "project_id": "admob-app-id-6801014372",
+    "storage_bucket": "admob-app-id-6801014372.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572817179669:android:6f5b5a2e394a8e7d",
+        "android_client_info": {
+          "package_name": "ir.winep.pharmacy.honey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572817179669-a4mg3n77d15mj7eg4n7ng1rhl11h4ead.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDG2Bdc0bKKd7vdfX1tGxSgPDdK43gaAA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572817179669:android:057652547088401a",
+        "android_client_info": {
+          "package_name": "ir.winep.winepbarcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572817179669-a4mg3n77d15mj7eg4n7ng1rhl11h4ead.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDG2Bdc0bKKd7vdfX1tGxSgPDdK43gaAA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
